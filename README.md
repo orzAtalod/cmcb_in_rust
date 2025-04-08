@@ -4,4 +4,4 @@
 
 Use rust toolchain (argmin, bridgestan, ndarray, etc.) and skip some simple codes.
 
-code lies in src/bin, run with `cargo run --bin [file\_name]`
+code lies in src/bin, run with `cargo run --bin [file_name]`
