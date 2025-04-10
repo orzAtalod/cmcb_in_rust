@@ -1,7 +1,10 @@
+// This program found trouble with accessing pdf value of Normal distribution. I won't continue the work until I found a satisfying crate for it.
+// Or I'll made a crate myself once I'm confident.
 use rand::Rng;
 use rand_distr::{Distribution, Uniform, Normal};
 use argmin::core::ArgminFloat;
 
+#[allow(dead_code)]
 struct McmcResult<FLOAT:Copy> {
     value: Vec<FLOAT>,
     burnin: usize,
@@ -15,6 +18,7 @@ impl<FLOAT:Copy> Distribution<FLOAT> for McmcResult<FLOAT> {
     }
 }
 
+#[allow(dead_code)]
 fn simple_mcmc_core<T,R,F1,F2,FLOAT>(init: FLOAT, proposed_distr: T, unnormal_possibility: F1, stop_condition: F2, rng: &mut R) -> McmcResult<FLOAT>
     where T: Distribution<FLOAT>,
           F1: Fn(FLOAT) -> f64,
@@ -39,10 +43,12 @@ fn simple_mcmc_core<T,R,F1,F2,FLOAT>(init: FLOAT, proposed_distr: T, unnormal_po
     res
 }
 
+#[allow(dead_code)]
 fn mcmc_stop_after<FLOAT:Copy>(step: usize) -> Box<dyn Fn(&McmcResult<FLOAT>) -> bool> {
     Box::new(move |chain: &McmcResult<FLOAT>| chain.value.len() > step)
 }
 
+#[allow(dead_code)]
 fn simple_mcmc<T,F1>(init: f64, proposed_distr: T, unnormal_possibility: F1) -> McmcResult<f64> 
     where T: Distribution<f64>,
           F1: Fn(f64) -> f64 {
@@ -52,6 +58,7 @@ fn simple_mcmc<T,F1>(init: f64, proposed_distr: T, unnormal_possibility: F1) -> 
     res
 }
 
+#[allow(dead_code)]
 fn likelihood(x: f64) -> f64 {
     Normal::new(x, 15.0).unwrap();
     10.0

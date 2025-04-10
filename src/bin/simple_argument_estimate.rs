@@ -1,7 +1,11 @@
+/*
+    Solving Liner_regression problem using traditional method, simulated annealing and neldermead method.
+    Implemented using argmin crate.
+*/
 use argmin::core::{CostFunction,Error,Executor};
 use argmin::solver::simulatedannealing::{Anneal,SimulatedAnnealing};
 use argmin_math::*;
-use rand_distr::{Distribution,StandardNormal,Normal};
+use rand_distr::{Distribution,StandardNormal};
 use anyhow::*;
 use rand::Rng;
 
@@ -62,7 +66,6 @@ impl Anneal for LinerRegressionProblem {
 
     fn anneal(&self, param: &Self::Param, extent: Self::Float) -> Result<LinerModel, Error> {
         let mut rng = rand::rng();
-        let normal = Normal::new(0.0, extent).unwrap();
         return Ok(LinerModel {
             gradient: param.gradient + extent*(rng.random::<f64>()-0.5),
             intercept: param.intercept + extent*(rng.random::<f64>()-0.5),
