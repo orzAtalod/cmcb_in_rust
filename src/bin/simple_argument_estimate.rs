@@ -66,7 +66,7 @@ impl Anneal for LinerRegressionProblem {
 
     fn anneal(&self, param: &Self::Param, extent: Self::Float) -> Result<LinerModel, Error> {
         let mut rng = rand::rng();
-        return Ok(LinerModel {
+        Ok(LinerModel {
             gradient: param.gradient + extent*(rng.random::<f64>()-0.5),
             intercept: param.intercept + extent*(rng.random::<f64>()-0.5),
         })

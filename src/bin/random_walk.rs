@@ -39,7 +39,7 @@ fn random_walk_model_stimulate((drift, sdrw, criterion):(f64, f64, f64)) -> Resu
 }
 
 fn draw_random_walk(walks:Vec<&TimedValue>, citerion:f64) {
-    let max_latency = walks.iter().map(|i| i.len()).max().unwrap_or(0) as usize;
+    let max_latency = walks.iter().map(|i| i.len()).max().unwrap_or(0);
 
     let root_drawing_area = BitMapBackend::new(OUT_FILE_NAME_RANDOM_WALK, (1024, 768)).into_drawing_area();
     root_drawing_area.fill(&WHITE).unwrap();
@@ -59,8 +59,8 @@ fn draw_random_walk(walks:Vec<&TimedValue>, citerion:f64) {
     println!("Plot saved to {}", OUT_FILE_NAME_RANDOM_WALK);
 }
 
-fn draw_histo_gram(walks:Vec<WalkResult>) {
-    let (top_latency, bottom_latency, top_num) = walks.iter().fold((0,0,0), |(t,b,c),(f,v)| {
+fn draw_histo_gram(_:Vec<WalkResult>) {
+/*    let (top_latency, bottom_latency, top_num) = walks.iter().fold((0,0,0), |(t,b,c),(f,v)| {
         if *f {(t + v.len(), b, c+1)} else {(t, b + v.len(), c)}
     });
     let top_latency = top_latency as f64 / top_num as f64;
@@ -99,7 +99,7 @@ fn draw_histo_gram(walks:Vec<WalkResult>) {
 
     root_drawing_area[0].present().expect("msg: failed to present the plot");
     root_drawing_area[1].present().expect("msg: failed to present the plot");
-    println!("Plot saved to {}", OUT_FILE_NAME_HISTO);
+    println!("Plot saved to {}", OUT_FILE_NAME_HISTO);*/
 }
 
 fn main() {

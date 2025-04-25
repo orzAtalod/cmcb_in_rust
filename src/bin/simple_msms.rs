@@ -43,8 +43,10 @@ fn simple_mcmc_core<T,R,F1,F2,FLOAT>(init: FLOAT, proposed_distr: T, unnormal_po
     res
 }
 
+type ResultFunc<FLOAT> = Box<dyn Fn(&McmcResult<FLOAT>) -> bool>;
+
 #[allow(dead_code)]
-fn mcmc_stop_after<FLOAT:Copy>(step: usize) -> Box<dyn Fn(&McmcResult<FLOAT>) -> bool> {
+fn mcmc_stop_after<FLOAT:Copy>(step: usize) -> ResultFunc<FLOAT> {
     Box::new(move |chain: &McmcResult<FLOAT>| chain.value.len() > step)
 }
 
